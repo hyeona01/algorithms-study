@@ -1,43 +1,35 @@
+# 복습
+
 import sys
 
-N = int(sys.stdin.readline())
+n = int(sys.stdin.readline())
 
+# 백트래킹 방법 사용: 퀸이 놓여질 자리가 없으면 이전으로 돌아가, 다른 자리로 가봐야 함
+# 수직, 수평, 대각선 제외
+
+diag1 = []
+diag2 = []
 col_list = []
-diag_list = [] # 좌측 상향 대각선
-diag2_list = [] # 우측 상향 대각선
+row_list = []
 count = 0
 
-def put_queen(r, c):
-  if c in col_list:
-    return False
-  elif r-c in diag_list:
-    return False
-  elif r+c in diag2_list:
-    return False
-  else:
-    col_list.append(c)
-    diag_list.append(r-c)
-    diag2_list.append(r+c)
-    return True
-
-# 시작 행은 0, N-1 행의 퀸까지 찾으면 종료
-def chess(row):
+def n_queen(row):
+  global n
   global count
-  # 종료 조건: 적합한 방법을 찾은 경우
-  if row == N:
+
+  if row == n: # 퀸이 n번 전부 놓였을 경우 종료
     count += 1
     return
   
-  # -- 적합한지 검증 --
-  for col in range(N):
-    # 적합할 경우
-    if put_queen(row, col):
-      chess(row + 1) # 다음 행으로 가기
+  for col in range(n): # 0 ~ n-1 열에서 각각 시작
+    if col not in col_list and (row - col) not in diag1 and (row + col) not in diag2:
+      col_list.append(col)
+      diag1.append(row - col)
+      diag2.append(row + col)
+      n_queen(row + 1)
+      col_list.pop()
+      diag1.pop()
+      diag2.pop()
 
-      # 전체 열을 탐색하였으나, 실패했을 경우 직전 행의 퀸 제거
-      col_list.pop(-1)
-      diag_list.pop(-1)      
-      diag2_list.pop(-1)      
-  
-chess(0)
+n_queen(0)
 print(count)
