@@ -31,7 +31,7 @@ def safty_area():
     global max_height
     max_safty_area = 0
 
-    for height in range(max_height + 1):  # 높이 0부터 max_height까지
+    for height in range(max_height):  # 높이 0부터 max_height까지
         visited = [[False] * N for _ in range(N)] # 초기화
         count = 0 # 초기화
 
