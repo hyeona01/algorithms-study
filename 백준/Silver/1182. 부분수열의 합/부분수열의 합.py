@@ -2,38 +2,23 @@
 # 조합 문제임 - 부분수열의 원소가 1~N개일 때의 모든 경우를 완탐
 
 import sys
-from itertools import combinations
 
 N, S = map(int, sys.stdin.readline().split())
 A = list(map(int, sys.stdin.readline().split()))
 count = 0
 
-for i in range(1, N+1): # 부분 수열의 원소 개수가 1 ~ N까지
-  combi = list(combinations(A, i))
-  for perm in combi:
-    if sum(perm) == S:
+def solution(idx, sum_list):
+  global count
+  if (idx == 0 and len(sum_list) > 0) or 0 < idx <= N:
+  # if idx < N: # 인덱스 범위
+    if sum(sum_list) == S: # base case: 합이 S와 일치하는지 확인
       count += 1
+
+  for i in range(idx, N): # 현재 인덱스 이후의 인덱스만 탐색함(중복 제거)
+    # if idx == 0 or idx < i: # 직전 인덱스 보다 커야 함(중복 제거)
+    sum_list.append(A[i]) # 원소 추가
+    solution(i+1, sum_list) # base case 확인
+    sum_list.pop()
+
+solution(0, [])
 print(count)
-
-# visited = [False] * N
-# temp = []
-
-# def solution(perm, n):
-#   global count
-
-#   if sum(perm) == 0 and len(perm) == n and len(perm) > 0: # 부분수열의 합이 0이고, 부분수열의 원소 수가 n일 경우
-#     count += 1
-#     return
-  
-#   for i in range(1, N+1): # 부분수열 원소의 수
-#     for idx in range(N):
-#       if len(temp) < i - 1 and visited[idx] == False:
-#         temp.append(A[idx])
-#         visited[idx] = True
-
-#         solution(perm, i)
-
-#         temp.pop()
-#         visited[idx] = False
-
-# solution(temp, 0)
