@@ -17,8 +17,8 @@ result = float('inf')
 a = 0 # 작은 수의 용액
 b = 0 # 큰 수의 용액
 
+# 이거 완탐? 여튼 이진탐색은 아니지 않나?
 while start < end: # 투 포인터이고 1씩 값이 변화하기 때문에 <= 을 하게 되면 연산을 한 번 더 하게 됨
-  center = (start + end) // 2
   diff = arr[start] + arr[end]
 
   if diff >= 0:
