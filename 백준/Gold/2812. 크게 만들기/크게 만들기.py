@@ -8,17 +8,10 @@ stack = []
 
 cnt = 0
 for num in nums:
-  # if not stack: # 비어있다면
-  #   stack.append(num)
-
   while stack and stack[-1] < num and cnt < K:
     cnt += 1
     stack.pop()
-
   stack.append(num)
-
-  # else:
-  #   stack.append(num)
 
 # 987654 의 경우 k만큼 제거하지 못함
 while cnt < K:
