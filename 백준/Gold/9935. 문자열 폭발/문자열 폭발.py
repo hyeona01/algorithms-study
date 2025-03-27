@@ -1,6 +1,6 @@
 # 9935번 문자열 폭발
 
-# 스택?
+# 스택
 
 import sys
 from collections import deque
@@ -12,12 +12,12 @@ new_str = []
 for i in range(len(str)):
   new_str.append(str[i])
   n = len(target)
+
+  # 스택에 쌓인 문자열이 폭발 문자열의 길이보다 클 때
   if len(new_str) >= n:
-    str_idx = -1
-    search = new_str[-n:-1]
-    search.append(new_str[-1])
-    if search == target:
-      for _ in range(n):
+    search = new_str[-n:]
+    if search == target: # 폭발 문자열과 같은지 확인
+      for _ in range(n): # 같다면 스택에서 pop
         new_str.pop()
 
 if new_str:
@@ -25,9 +25,3 @@ if new_str:
     print(str, end='')
 else:
   print('FRULA')
-
-# test = deque(['m', 'i', 'r'])
-# target = deque('mi')
-
-# print(test[-3:-1])
-# print(test[-3:-1] == target)
