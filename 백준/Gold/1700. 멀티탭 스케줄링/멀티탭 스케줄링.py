@@ -1,10 +1,10 @@
 import sys
 
 N, K = map(int, sys.stdin.readline().split())
-# use_list = list(map(int, sys.stdin.readline().rstrip().split()))
-use_list = []
-while len(use_list) < K:
-    use_list += list(map(int, sys.stdin.readline().split()))
+use_list = list(map(int, sys.stdin.readline().rstrip().split()))
+# use_list = []
+# while len(use_list) < K:
+#     use_list += list(map(int, sys.stdin.readline().split()))
 multitap = [] # 사용 중인 멀티탭
 cnt = 0
 
