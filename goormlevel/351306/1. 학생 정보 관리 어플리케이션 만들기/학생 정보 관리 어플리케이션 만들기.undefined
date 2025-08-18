@@ -1,0 +1,27 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	let lines = [];
+	for await (const line of rl) {
+		lines.push(line);
+		rl.close();
+	}
+
+	const cnt = parseInt(lines[0]);
+	const students = [];
+	
+	for(let i=1; i<=cnt; i++){
+		const [cmd, target] = lines[i].split(" ");
+		if(cmd === "add"){
+			students.push(target);
+		}
+		else if(cmd === "find"){
+			const matchStudents = students.filter(a => a.indexOf(target) === 0);
+			console.log(matchStudents.length);
+		}
+	}
+	
+	process.exit();
+})();
