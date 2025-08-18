@@ -1,0 +1,27 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+
+	let read;
+	for await (const line of rl) {
+		read = line;
+		rl.close();
+	}
+
+	const [x, y] = read.split(" ").map(Number);
+	const minNum = Math.min(x, y);
+
+	const gcd = (a, b) => {
+    while (b !== 0) {
+      [a, b] = [b, a % b];
+    }
+    return a;
+  };
+
+	const result = gcd(x, y);
+	console.log("%d:%d", x/result, y/result)
+	
+	process.exit();
+})();
