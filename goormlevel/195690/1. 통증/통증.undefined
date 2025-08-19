@@ -1,0 +1,28 @@
+const readline = require('readline');
+let rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+let input;
+rl.on('line', (line) => {
+	input = line;
+	rl.close();
+});
+
+
+rl.on('close', () => {
+	let result = 0;
+	input = Number(input);
+	
+	if(input >= 14){
+		result += Math.floor(input / 14);
+		input = input % 14;
+	}
+	if(input >= 7){
+		result += Math.floor(input / 7);
+		input = input % 7;
+	}
+	result += input;
+	console.log(result);
+	process.exit();
+})
