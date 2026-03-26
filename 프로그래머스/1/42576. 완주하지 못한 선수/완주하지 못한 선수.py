@@ -1,15 +1,18 @@
 def solution(participant, completion):
-    # 정렬
-    participant.sort()
-    completion.sort()
+    sum_hash = 0
+    hash_dict = {}    
     
-    # 비교 후 다른 선수를 발견하면 return
-    for i in range((len(completion))):
-        if participant[i] != completion[i]:
-            return participant[i]
+    # 참여자 해시 생성 및 해시 총합 구하기
+    for player in participant:
+        hash_key = hash(player)
+        hash_dict[hash_key] = player
+        sum_hash += hash_key
     
-    # 전부 비교했는데도 없으면 마지막 선수 return
-    return participant[-1]
+    # 완주자 해시를 총합에서 빼기
+    for player in completion:
+        sum_hash -= hash(player)
     
+    # 남은 총합의 해시 value return
+    return hash_dict[sum_hash]
     
     # return answer
