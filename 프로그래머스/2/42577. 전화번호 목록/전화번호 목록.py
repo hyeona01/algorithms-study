@@ -1,13 +1,17 @@
 def solution(phone_book):
-    # 전화번호부 정렬
-    phone_book.sort()
+    # 해시 자료구조로 저장
+    hash_dict = {}
+    for phoneNum in phone_book:
+        # hash_dict[hash(phoneNum)] = phoneNum
+        hash_dict[phoneNum] = 1
     
-    # 전화번호부의 전화번호를 모두 순회
-    # 인접한 번호의 접두어가 같은 지 확인
-    # 일치하면 바로 False 리턴
-    for i in range(len(phone_book)-1):
-        if phone_book[i] == phone_book[i+1][0:len(phone_book[i])]:
-            return False
-    return True   
+    for number in phone_book:
+        temp = ""
+        for i in range(len(number) - 1):
+            temp += number[i]
+            if temp in hash_dict: 
+                return False
+    return True
+    
     
     # return answer
